@@ -9,9 +9,9 @@
 
 ![VSCODE](https://badges.aleen42.com/src/visual_studio_code.svg)
 
-[![VSCODE](https://badges.aleen42.com/src/javascript.svg)]
+![VSCODE](https://badges.aleen42.com/src/javascript.svg)
 
-[![WEBPACK](https://badges.aleen42.com/src/webpack.svg)]
+![WEBPACK](https://badges.aleen42.com/src/webpack.svg)
 
 
-[![ESLINT](https://badges.aleen42.com/src/eslint.svg)]
+![ESLINT](https://badges.aleen42.com/src/eslint.svg)
