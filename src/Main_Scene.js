@@ -17,6 +17,17 @@ class Main_Scene extends Phaser.Scene
         super({
             key: 'MainGame'
         });
+        this.filled = false;
+        this.itemInTr1=null;
+        this.itemInTr2=null;
+        this.itemInTr3=null;
+        this.itemInTr4=null;
+        this.itemInTr5=null;
+        this.itemInBr1=null;
+        this.itemInBr2=null;
+        this.itemInBr3=null;
+        this.itemInBr4=null;
+        this.itemInBr5=null;
 
     }
 
@@ -38,37 +49,47 @@ class Main_Scene extends Phaser.Scene
     {
         this.Create_Rectangle_Add_Scrollable_Meta();    
         this.input.on('dragend', (pointer, gameObject) => {
-            console.log(this.input.mousePointer.x, this.input.mousePointer.y)
+            console.log(this.input.mousePointer.x, this.input.mousePointer.y) // TODO: REMOVE THIS IN PRODUCTION
             //----------------------- FOR TOP ROW SWAPPING ---------------------------------
             if((this.input.mousePointer.x<=144)&&(this.input.mousePointer.y<=144)){
             // Stick Object to tr1 if it's detected within range
             gameObject.x=74
             gameObject.y=74
+            this.itemInTr1=gameObject.name
             console.log(`${gameObject.name} is in tr1`)
+            this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=288)&&((this.input.mousePointer.x>=144))&&(this.input.mousePointer.y<=144))){
                 // Stick Object to tr2 if it's detected within range
                 gameObject.x=218
                 gameObject.y=74
+                this.itemInTr2=gameObject.name
                 console.log(`${gameObject.name} is in tr2`)
+                this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=432)&&((this.input.mousePointer.x>=288))&&(this.input.mousePointer.y<=144))){
                 // Stick Object to tr3 if it's detected within range
                 gameObject.x=366
                 gameObject.y=74
+                this.itemInTr3=gameObject.name
                 console.log(`${gameObject.name} is in tr3`)
+                this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=576)&&((this.input.mousePointer.x>=432))&&(this.input.mousePointer.y<=144))){
-                            // Stick Object to tr4 if it's detected within range
-                            gameObject.x=510
-                            gameObject.y=74
-                            console.log(`${gameObject.name} is in tr4`)
+                // Stick Object to tr4 if it's detected within range
+                gameObject.x=510
+                gameObject.y=74
+                this.itemInTr4=gameObject.name
+                console.log(`${gameObject.name} is in tr4`)
+                this.itemChecker();
             
             }else if (((this.input.mousePointer.x<=720)&&((this.input.mousePointer.x>=576))&&(this.input.mousePointer.y<=144))){
                 // Stick Object to tr5 if it's detected within range
                 gameObject.x=654
                 gameObject.y=74
+                this.itemInTr5=gameObject.name
                 console.log(`${gameObject.name} is in tr5`)
+                this.itemChecker();
             }
 
                  //----------------------- FOR BOTTOM ROW SWAPPING ---------------------------------
@@ -77,37 +98,83 @@ class Main_Scene extends Phaser.Scene
                     // Stick Object to br1 if it's detected within range
                     gameObject.x=74
                     gameObject.y=220
+                    this.itemInBr1=gameObject.name
                     console.log(`${gameObject.name} is in br1`)
+                    this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=288)&&((this.input.mousePointer.x>=144))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
                         // Stick Object to tr2 if it's detected within range
                         gameObject.x=218
                         gameObject.y=220
+                        this.itemInBr2=gameObject.name
                         console.log(`${gameObject.name} is in br2`)
+                        this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=432)&&((this.input.mousePointer.x>=288))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
                         // Stick Object to tr3 if it's detected within range
                         gameObject.x=366
                         gameObject.y=220
+                        this.itemInBr3=gameObject.name
                         console.log(`${gameObject.name} is in br3`)
+                        this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=576)&&((this.input.mousePointer.x>=432))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
-                                    // Stick Object to tr4 if it's detected within range
-                                    gameObject.x=510
-                                    gameObject.y=220
-                                    console.log(`${gameObject.name} is in br4`)
+                        // Stick Object to tr4 if it's detected within range
+                        gameObject.x=510
+                        gameObject.y=220
+                        this.itemInBr4=gameObject.name
+                        console.log(`${gameObject.name} is in br4`)
+                        this.itemChecker();
                     
                     }else if (((this.input.mousePointer.x<=720)&&((this.input.mousePointer.x>=576))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
                         // Stick Object to tr5 if it's detected within range
                         gameObject.x=654
                         gameObject.y=220
+                        this.itemInBr5=gameObject.name
                         console.log(`${gameObject.name} is in br5`)
+                        this.itemChecker();
                     }
-            
-
+                
 
 }
         );
+    }
+    itemChecker(){
+        console.warn(`${this.itemInTr1} ${this.itemInTr2} ${this.itemInTr3} ${this.itemInTr4} ${this.itemInTr5} `)
+        console.warn(`${this.itemInBr1} ${this.itemInBr2} ${this.itemInBr3} ${this.itemInBr4} ${this.itemInBr5} `)
+        if((this.itemInTr1!=null)&&(this.itemInTr2!=null)&&(this.itemInTr3!=null)&&(this.itemInTr4!=null)&&(this.itemInTr5!=null)&&(this.itemInBr1!=null)&&(this.itemInBr2!=null)&&(this.itemInBr3!=null)&&(this.itemInBr4!=null)&&(this.itemInBr5!=null)){
+            this.input.off('drag')
+            this.input.off('dragend')
+            const number_align = [this.itemInTr1,this.itemInTr2,this.itemInTr3,this.itemInTr4,this.itemInTr5,this.itemInBr1,this.itemInBr2,this.itemInBr3,this.itemInBr4,this.itemInBr5]
+            console.log(number_align)
+        }
+        this.OrderChecker();
+        
+
+
+    }
+
+    OrderChecker(number_array,type='assending'){
+        let correct_order = true
+        let array_number = [1,4,3,2,5,8,6,7]
+        console.log(array_number)
+        let expected_result = array_number
+        expected_result.sort(function(a, b){return a - b});// Assending Order {sort(function(a, b){return b - a});} -- > //Desencing Order
+        console.log(expected_result)
+        for (let i=0;i<array_number.length;i++){
+        if(correct_order){
+            if(array_number[i]!=expected_result[i]){
+                console.log(` comparing ${array_number[i]} and ${expected_result[i]}`)
+                correct_order=false
+            }
+        }
+        }
+        if(correct_order==true){
+            console.log("You WON")
+        }
+        else {
+            console.log("You Fail")
+        }
     }
 
     Create_Rectangle_Add_Scrollable_Meta(){
