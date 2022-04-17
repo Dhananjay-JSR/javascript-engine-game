@@ -4,9 +4,13 @@ import MainMenu from "./Main_Menu";
 
 const config = {
     type: AUTO,
-    parent: 'root-example',
-    width: 1024,
-    height: 720,
+    autoCenter : true,
+    scale: {
+        mode: Phaser.Scale.RESIZE,
+        parent: 'phaser-example',
+        width: '100%',
+        height: '100%'
+    },
     scene: [ MainMenu ]
 };
 

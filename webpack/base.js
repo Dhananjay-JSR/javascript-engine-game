@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const FontPreloadPlugin = require("webpack-font-preload-plugin");
 
 module.exports = {
   mode: "development",
@@ -20,7 +21,15 @@ module.exports = {
         use: "raw-loader"
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        use: "file-loader"
+      },
+      {
+        test: /\.(mp3)$/i,
+        use: "file-loader"
+      },
+      {
+        test: /\.(webp)$/i,
         use: "file-loader"
       }
     ]
