@@ -1,4 +1,7 @@
-export default config = {
+import Main_Scene from "./Main_Scene";
+import Phaser from "phaser";
+
+const config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 1024,
@@ -10,5 +13,7 @@ export default config = {
             debug: true
         }
     },
-    scene: [ MyGame ]
+    scene: [ Main_Scene ]
 };
+
+export default config;
