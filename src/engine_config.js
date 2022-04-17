@@ -11,7 +11,7 @@ const config = {
         width: '100%',
         height: '100%'
     },
-    scene: [ MainMenu ]
+    scene: [ MainMenu,Main_Scene ]
 };
 
 export default config;
