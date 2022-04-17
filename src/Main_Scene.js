@@ -48,6 +48,17 @@ class Main_Scene extends Phaser.Scene
     create ()
     {
         this.Create_Rectangle_Add_Scrollable_Meta();    
+        this.dragHandler();
+        this.textDisplay();
+
+    }
+
+    textDisplay(){
+        this.textDisplay = this.add.text(170, 349, 'Drag the numbers to the right order (Assending Order )', { font: '24px Arial', fill: '#ffffff' });
+        
+    }
+
+    dragHandler(){
         this.input.on('dragend', (pointer, gameObject) => {
             console.log(this.input.mousePointer.x, this.input.mousePointer.y) // TODO: REMOVE THIS IN PRODUCTION
             //----------------------- FOR TOP ROW SWAPPING ---------------------------------
@@ -56,7 +67,7 @@ class Main_Scene extends Phaser.Scene
             gameObject.x=74
             gameObject.y=74
             this.itemInTr1=gameObject.name
-            console.log(`${gameObject.name} is in tr1`)
+            console.log(`${gameObject.name} is in tr1`) // :TODO: Remove this line
             this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=288)&&((this.input.mousePointer.x>=144))&&(this.input.mousePointer.y<=144))){
@@ -64,7 +75,7 @@ class Main_Scene extends Phaser.Scene
                 gameObject.x=218
                 gameObject.y=74
                 this.itemInTr2=gameObject.name
-                console.log(`${gameObject.name} is in tr2`)
+                console.log(`${gameObject.name} is in tr2`) // :TODO: Remove this line
                 this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=432)&&((this.input.mousePointer.x>=288))&&(this.input.mousePointer.y<=144))){
@@ -72,7 +83,7 @@ class Main_Scene extends Phaser.Scene
                 gameObject.x=366
                 gameObject.y=74
                 this.itemInTr3=gameObject.name
-                console.log(`${gameObject.name} is in tr3`)
+                console.log(`${gameObject.name} is in tr3`) // :TODO: Remove this line
                 this.itemChecker();
             }
             else if (((this.input.mousePointer.x<=576)&&((this.input.mousePointer.x>=432))&&(this.input.mousePointer.y<=144))){
@@ -80,7 +91,7 @@ class Main_Scene extends Phaser.Scene
                 gameObject.x=510
                 gameObject.y=74
                 this.itemInTr4=gameObject.name
-                console.log(`${gameObject.name} is in tr4`)
+                console.log(`${gameObject.name} is in tr4`) // :TODO: Remove this line
                 this.itemChecker();
             
             }else if (((this.input.mousePointer.x<=720)&&((this.input.mousePointer.x>=576))&&(this.input.mousePointer.y<=144))){
@@ -88,7 +99,7 @@ class Main_Scene extends Phaser.Scene
                 gameObject.x=654
                 gameObject.y=74
                 this.itemInTr5=gameObject.name
-                console.log(`${gameObject.name} is in tr5`)
+                console.log(`${gameObject.name} is in tr5`) // :TODO: Remove this line
                 this.itemChecker();
             }
 
@@ -99,7 +110,7 @@ class Main_Scene extends Phaser.Scene
                     gameObject.x=74
                     gameObject.y=220
                     this.itemInBr1=gameObject.name
-                    console.log(`${gameObject.name} is in br1`)
+                    console.log(`${gameObject.name} is in br1`) // :TODO: Remove this line
                     this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=288)&&((this.input.mousePointer.x>=144))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
@@ -107,7 +118,7 @@ class Main_Scene extends Phaser.Scene
                         gameObject.x=218
                         gameObject.y=220
                         this.itemInBr2=gameObject.name
-                        console.log(`${gameObject.name} is in br2`)
+                        console.log(`${gameObject.name} is in br2`) // :TODO: Remove this line
                         this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=432)&&((this.input.mousePointer.x>=288))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
@@ -115,7 +126,7 @@ class Main_Scene extends Phaser.Scene
                         gameObject.x=366
                         gameObject.y=220
                         this.itemInBr3=gameObject.name
-                        console.log(`${gameObject.name} is in br3`)
+                        console.log(`${gameObject.name} is in br3`) // :TODO: Remove this line
                         this.itemChecker();
                     }
                     else if (((this.input.mousePointer.x<=576)&&((this.input.mousePointer.x>=432))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
@@ -123,7 +134,7 @@ class Main_Scene extends Phaser.Scene
                         gameObject.x=510
                         gameObject.y=220
                         this.itemInBr4=gameObject.name
-                        console.log(`${gameObject.name} is in br4`)
+                        console.log(`${gameObject.name} is in br4`) // :TODO: Remove this line
                         this.itemChecker();
                     
                     }else if (((this.input.mousePointer.x<=720)&&((this.input.mousePointer.x>=576))&&((this.input.mousePointer.y>=144)&&(this.input.mousePointer.y<=288)))){
@@ -131,7 +142,7 @@ class Main_Scene extends Phaser.Scene
                         gameObject.x=654
                         gameObject.y=220
                         this.itemInBr5=gameObject.name
-                        console.log(`${gameObject.name} is in br5`)
+                        console.log(`${gameObject.name} is in br5`) // :TODO: Remove this line
                         this.itemChecker();
                     }
                 
@@ -146,34 +157,35 @@ class Main_Scene extends Phaser.Scene
             this.input.off('drag')
             this.input.off('dragend')
             const number_align = [this.itemInTr1,this.itemInTr2,this.itemInTr3,this.itemInTr4,this.itemInTr5,this.itemInBr1,this.itemInBr2,this.itemInBr3,this.itemInBr4,this.itemInBr5]
-            console.log(number_align)
+            console.log(number_align) // :TODO: Remove this line
+            this.OrderChecker(number_align);
         }
-        this.OrderChecker();
         
 
 
     }
 
     OrderChecker(number_array,type='assending'){
-        let correct_order = true
-        let array_number = [1,4,3,2,5,8,6,7]
-        console.log(array_number)
-        let expected_result = array_number
+        this.correct_order = true
+        let array_number = number_array
+        console.log(array_number)  // :TODO: Remove this line
+        let expected_result = [...array_number]
         expected_result.sort(function(a, b){return a - b});// Assending Order {sort(function(a, b){return b - a});} -- > //Desencing Order
-        console.log(expected_result)
         for (let i=0;i<array_number.length;i++){
-        if(correct_order){
-            if(array_number[i]!=expected_result[i]){
-                console.log(` comparing ${array_number[i]} and ${expected_result[i]}`)
-                correct_order=false
+            if(this.correct_order){
+                if(expected_result[i]!=array_number[i])
+                    {
+                        this.correct_order = false
+                    }
             }
         }
-        }
-        if(correct_order==true){
-            console.log("You WON")
+        if(this.correct_order==true){
+            console.log("You WON") // :TODO: Remove this line
+            this.textDisplay.text="YOU WON"
         }
         else {
-            console.log("You Fail")
+            console.log("You Fail") // :TODO: Remove this line
+            this.textDisplay.text="YOU LOOSE"
         }
     }
 
