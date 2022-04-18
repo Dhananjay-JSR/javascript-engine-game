@@ -10,6 +10,7 @@ import seven from './assets/7.png';
 import eight from './assets/8.png';
 import nine from './assets/9.png';
 import trainStart from './assets/video/train_in.mp4'
+
 import trainEnd from './assets/video/train_out.mp4'
 
 class Main_Scene extends Phaser.Scene
@@ -57,7 +58,17 @@ class Main_Scene extends Phaser.Scene
         // this.Create_Rectangle_Add_Scrollable_Meta();    
         // this.dragHandler();
         // this.textDisplay();
-        this.getVideoFile();
+        this.add.video(950,600,'train_in').play(false).on('complete',()=>{
+            this.Create_Rectangle_Add_Scrollable_Meta()
+            this.dragHandler()
+        })
+        this.add.video(950,10,'train_in').play(false)
+        // this.trainVid1.play(false,0,7.21)
+        // this.trainVid2.play(false,0,7.21)
+        // this.trainVid2.on('complete',()=>{
+        //     console.log("hello")
+        // })
+
 
     }
 
@@ -115,43 +126,43 @@ class Main_Scene extends Phaser.Scene
             }
 
             //      //----------------------- FOR BOTTOM ROW SWAPPING ---------------------------------
-            if(((this.input.mousePointer.x>=607)&&(this.input.mousePointer.x<=751))&&((this.input.mousePointer.y<=790)&&(this.input.mousePointer.y>=644))){
+            if(((this.input.mousePointer.x>=607)&&(this.input.mousePointer.x<=751))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
                     // Stick Object to br1 if it's detected within range
                     gameObject.x=676 
-                    gameObject.y=719
+                    gameObject.y=719+100
                     this.itemInBr1=gameObject.name
                     console.log(`${gameObject.name} is in br1`) // :TODO: Remove this line
                     this.itemChecker();
                     }
-                    else if (((this.input.mousePointer.x<=1015)&&(this.input.mousePointer.x>=288))&&((this.input.mousePointer.y<=790)&&(this.input.mousePointer.y>=644))){
+                    else if (((this.input.mousePointer.x<=1015)&&(this.input.mousePointer.x>=288))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
                         // Stick Object to tr2 if it's detected within range
                         gameObject.x=937 
-                        gameObject.y=719
+                        gameObject.y=719+100
                         this.itemInBr2=gameObject.name
                         console.log(`${gameObject.name} is in br2`) // :TODO: Remove this line
                         this.itemChecker();
                     }
-                    else if (((this.input.mousePointer.x<=1269 )&&(this.input.mousePointer.x>=1123 ))&&((this.input.mousePointer.y<=790)&&(this.input.mousePointer.y>=644))){
+                    else if (((this.input.mousePointer.x<=1269 )&&(this.input.mousePointer.x>=1123 ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
                         // Stick Object to tr3 if it's detected within range
                         gameObject.x=1187 
-                        gameObject.y=719
+                        gameObject.y=719+100
                         this.itemInBr3=gameObject.name
                         console.log(`${gameObject.name} is in br3`) // :TODO: Remove this line
                         this.itemChecker();
                     }
-                    else if (((this.input.mousePointer.x<=1523)&&(this.input.mousePointer.x>=1377  ))&&((this.input.mousePointer.y<=790)&&(this.input.mousePointer.y>=644))){
+                    else if (((this.input.mousePointer.x<=1523)&&(this.input.mousePointer.x>=1377  ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
                         // Stick Object to tr4 if it's detected within range
                         gameObject.x=1441 
-                        gameObject.y=719
+                        gameObject.y=719+100
                         this.itemInBr4=gameObject.name
                         console.log(`${gameObject.name} is in br4`) // :TODO: Remove this line
                         this.itemChecker();
                     
                     }
-                    else if (((this.input.mousePointer.x<=1777)&&(this.input.mousePointer.x>=1634 ))&&((this.input.mousePointer.y<=790)&&(this.input.mousePointer.y>=644))){
+                    else if (((this.input.mousePointer.x<=1777)&&(this.input.mousePointer.x>=1634 ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
                         // Stick Object to tr5 if it's detected within range
                         gameObject.x=1698
-                        gameObject.y=719
+                        gameObject.y=719+100
                         this.itemInBr5=gameObject.name
                         console.log(`${gameObject.name} is in br5`) // :TODO: Remove this line
                         this.itemChecker();
@@ -227,6 +238,7 @@ class Main_Scene extends Phaser.Scene
             gameObject.y = dragY;
         });
         
+        
     }
     Create_Rectangle_Add_Scrollable_Meta(){
         //Function to initlize Rectable and Add Dragable Property and Populate Meta Data by Name Tag
@@ -235,32 +247,22 @@ class Main_Scene extends Phaser.Scene
         this.tr3 = this.add.rectangle(1196 , 228, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
         this.tr4 = this.add.rectangle(1450 , 230, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
         this.tr5 = this.add.rectangle(1705 , 227, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br1 = this.add.rectangle(681 , 718, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br2 = this.add.rectangle(936 , 722, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br3 = this.add.rectangle(1194 , 718, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br4 = this.add.rectangle(1447, 718, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br5 = this.add.rectangle(1706 , 718, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)  
+        this.br1 = this.add.rectangle(681 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
+        this.br2 = this.add.rectangle(936 , 722+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
+        this.br3 = this.add.rectangle(1194 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
+        this.br4 = this.add.rectangle(1447, 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
+        this.br5 = this.add.rectangle(1706 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)  
        this.addTextAssets();
 
     //    this.physics.add.existing(this.zero)
     //    this.physics.add.existing(this.tr1)
 
     }
+    initliziseScene(){
+
+    }
     getVideoFile(){
-        let startVid2 = this.add.video(950,500,'train_in')
-        let startVid1 = this.add.video(950,10,'train_in')
-        startVid1.play(false,0,7.21)
-
-
-
-        
-
-        startVid1.on('complete',()=>{
-            this.Create_Rectangle_Add_Scrollable_Meta();
-            this.dragHandler()
-
-        })
-
+       
 
     }
 }
