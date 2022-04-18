@@ -20,6 +20,7 @@ class MainMenu extends Scene {
     create(){
         let music_state = true;
         var music = this.sound.add('menu_music');
+        music
         
         this.add.image(960,600,'menu_bg').setScale(1);
        

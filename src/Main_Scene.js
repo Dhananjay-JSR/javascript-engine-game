@@ -10,7 +10,6 @@ import seven from './assets/7.png';
 import eight from './assets/8.png';
 import nine from './assets/9.png';
 import trainStart from './assets/video/train_in.mp4'
-
 import trainEnd from './assets/video/train_out.mp4'
 
 class Main_Scene extends Phaser.Scene
@@ -31,7 +30,9 @@ class Main_Scene extends Phaser.Scene
         this.itemInBr3=null;
         this.itemInBr4=null;
         this.itemInBr5=null;
-
+        this.VideoObj1;
+        this.VideoObj2;
+        this.SceneManager = this.scene
     }
 
     preload ()
@@ -52,22 +53,26 @@ class Main_Scene extends Phaser.Scene
       
     create ()
     {
+        
         this.input.on('pointerdown',()=>{
            console.log( this.input.mousePointer.x, this.input.mousePointer.y)
         })
         // this.Create_Rectangle_Add_Scrollable_Meta();    
         // this.dragHandler();
-        // this.textDisplay();
-        this.add.video(950,600,'train_in').play(false).on('complete',()=>{
+        
+        this.VideoObj1 = this.add.video(950,600,'train_in').play(false).on('complete',()=>{
             this.Create_Rectangle_Add_Scrollable_Meta()
             this.dragHandler()
         })
-        this.add.video(950,10,'train_in').play(false)
+       this.VideoObj2 = this.add.video(950,10,'train_in').play(false)
         // this.trainVid1.play(false,0,7.21)
         // this.trainVid2.play(false,0,7.21)
         // this.trainVid2.on('complete',()=>{
         //     console.log("hello")
         // })
+
+        this.textDisplay();
+        
 
 
     }
@@ -75,7 +80,7 @@ class Main_Scene extends Phaser.Scene
 
 
     textDisplay(){
-        this.textDisplay = this.add.text(170, 349, 'Drag the numbers to the right order (Assending Order )', { font: '24px Arial', fill: '#ffffff' });
+        this.textDisplay = this.add.text(333 , 36, 'Drag the numbers to the right order (Assending Order )', { font: '60px Arial', fill: '#000000' });
         
     }
 
@@ -204,24 +209,64 @@ class Main_Scene extends Phaser.Scene
         if(this.correct_order==true){
             console.log("You WON") // :TODO: Remove this line
             this.textDisplay.text="YOU WON"
+            this.textDisplay.x="837"
+            
+            this.VideoObj1.changeSource('train_out').play(false)
+            this.VideoObj2.changeSource('train_out').play(false)
+            this.VideoObj1.addMarker('train_out',0,7.2)
+            this.zero.destroy();
+            this.one.destroy();
+            this.two.destroy()
+            this.three.destroy()
+            this.four.destroy()
+            this.five.destroy()
+            this.six.destroy()
+            this.seven.destroy()
+            this.eight.destroy()
+            this.nine.destroy()
+            let localVideo1 = this.VideoObj1
+            let localVideo2 = this.VideoObj2
+            
+            this.VideoObj1.on('complete',()=>{
+                this.zero.destroy()
+                this.one.destroy()
+                this.two.destroy()
+                this.three.destroy()
+                this.four.destroy()
+                this.five.destroy()
+                this.six.destroy()
+                this.seven.destroy()
+                this.eight.destroy()
+                this.nine.destroy()
+                localVideo2.destroy();
+                localVideo1.destroy()
+                let localText = this.add.text(571 ,478,"Refresh Page to Restart Game ", { font: '60px Arial', fill: '#FFFFFF' })
+                
+            })
+
         }
         else {
             console.log("You Fail") // :TODO: Remove this line
             this.textDisplay.text="YOU LOOSE"
+            this.textDisplay.x="837"
+            
+            // this.registry.destroy(); // destroy registry
+            // this.events.off()// disable all active events
+            
         }
     }
 
     addTextAssets(){
-        this.zero = this.add.image( 543 , 459, '0').setScale(0.5).setInteractive()
-        this.one = this.add.image( 150+493, 459, '1').setScale(0.5).setInteractive();
-        this.two = this.add.image( 250+493, 459, '2').setScale(0.5).setInteractive();
-        this.three = this.add.image( 350+493, 459, '3').setScale(0.5).setInteractive();
-        this.four = this.add.image( 450+493, 459, '4').setScale(0.5).setInteractive();
-        this.five = this.add.image( 550+493, 459, '5').setScale(0.5).setInteractive();
-        this.six = this.add.image( 650+493, 459, '6').setScale(0.5).setInteractive();
-        this.seven = this.add.image( 750+493, 459, '7').setScale(0.5).setInteractive();
-        this.eight = this.add.image( 850+493, 459, '8').setScale(0.5).setInteractive();
-        this.nine = this.add.image( 950+493, 459, '9').setScale(0.5).setInteractive();
+        this.zero = this.add.image( 543 , 459, '0').setScale(0.26).setInteractive()
+        this.one = this.add.image( 150+493, 459, '1').setScale(0.26).setInteractive();
+        this.two = this.add.image( 250+493, 459, '2').setScale(0.26).setInteractive();
+        this.three = this.add.image( 350+493, 459, '3').setScale(0.26).setInteractive();
+        this.four = this.add.image( 450+493, 459, '4').setScale(0.26).setInteractive();
+        this.five = this.add.image( 550+493, 459, '5').setScale(0.26).setInteractive();
+        this.six = this.add.image( 650+493, 459, '6').setScale(0.26).setInteractive();
+        this.seven = this.add.image( 750+493, 459, '7').setScale(0.26).setInteractive();
+        this.eight = this.add.image( 850+493, 459, '8').setScale(0.26).setInteractive();
+        this.nine = this.add.image( 950+493, 459, '9').setScale(0.26).setInteractive();
         this.zero.name=0
         this.one.name=1
         this.two.name=2
@@ -242,27 +287,20 @@ class Main_Scene extends Phaser.Scene
     }
     Create_Rectangle_Add_Scrollable_Meta(){
         //Function to initlize Rectable and Add Dragable Property and Populate Meta Data by Name Tag
-        this.tr1 = this.add.rectangle(679, 223, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.tr2 = this.add.rectangle(942, 230, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.tr3 = this.add.rectangle(1196 , 228, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.tr4 = this.add.rectangle(1450 , 230, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.tr5 = this.add.rectangle(1705 , 227, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br1 = this.add.rectangle(681 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br2 = this.add.rectangle(936 , 722+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br3 = this.add.rectangle(1194 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br4 = this.add.rectangle(1447, 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)
-        this.br5 = this.add.rectangle(1706 , 718+100, 148, 148, 0x9966ff).setStrokeStyle(4, 0xefc53f)  
+        this.tr1 = this.add.rectangle(679, 223, 148, 148)
+        this.tr2 = this.add.rectangle(942, 230, 148, 148)
+        this.tr3 = this.add.rectangle(1196 , 228, 148, 148)
+        this.tr4 = this.add.rectangle(1450 , 230, 148, 148)
+        this.tr5 = this.add.rectangle(1705 , 227, 148, 148)
+        this.br1 = this.add.rectangle(681 , 718+100, 148, 148)
+        this.br2 = this.add.rectangle(936 , 722+100, 148, 148)
+        this.br3 = this.add.rectangle(1194 , 718+100, 148, 148)
+        this.br4 = this.add.rectangle(1447, 718+100, 148, 148)
+        this.br5 = this.add.rectangle(1706 , 718+100, 148, 148) 
        this.addTextAssets();
 
     //    this.physics.add.existing(this.zero)
     //    this.physics.add.existing(this.tr1)
-
-    }
-    initliziseScene(){
-
-    }
-    getVideoFile(){
-       
 
     }
 }
