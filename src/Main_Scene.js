@@ -9,6 +9,8 @@ import six from './assets/6.png';
 import seven from './assets/7.png';
 import eight from './assets/8.png';
 import nine from './assets/9.png';
+import trainStart from './assets/video/train_in.mp4'
+import trainEnd from './assets/video/train_out.mp4'
 
 class Main_Scene extends Phaser.Scene
 {
@@ -33,6 +35,8 @@ class Main_Scene extends Phaser.Scene
 
     preload ()
     {
+        this.load.video('train_in', trainStart);
+        this.load.video('train_out', trainEnd);
         this.load.image('0', zero);
         this.load.image('1', one);
         this.load.image('2', two);
@@ -47,9 +51,18 @@ class Main_Scene extends Phaser.Scene
       
     create ()
     {
-        this.Create_Rectangle_Add_Scrollable_Meta();    
-        this.dragHandler();
-        this.textDisplay();
+        // this.Create_Rectangle_Add_Scrollable_Meta();    
+        // this.dragHandler();
+        // this.textDisplay();
+        let startVid2 = this.add.video(950,500,'train_in');
+        startVid2.play(false)
+        let startVid1 = this.add.video(950,10,'train_in');
+        startVid1.play(false)
+
+        startVid1.on('complete',()=>{
+            console.log("Train Arrived")
+        })
+
 
     }
 

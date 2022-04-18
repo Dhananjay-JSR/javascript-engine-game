@@ -31,6 +31,9 @@ module.exports = {
       {
         test: /\.(webp)$/i,
         use: "file-loader"
+      },{
+        test: /\.(mp4)$/i,
+        use: "file-loader"
       }
     ]
   },

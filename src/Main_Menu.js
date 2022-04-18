@@ -35,6 +35,7 @@ class MainMenu extends Scene {
         // this.sound.pauseOnBlur = false;
         music.play(); //TODO:Enable THis
         let startBtn = this.add.image(950,700,'startBtnImg').setInteractive().on('pointerdown',()=>{
+            // this.scene.destroy('MainMenu');
             this.scene.start('MainGame');
             music.pause();
         })
