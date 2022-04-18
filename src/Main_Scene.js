@@ -51,19 +51,26 @@ class Main_Scene extends Phaser.Scene
       
     create ()
     {
+        this.input.on('pointerdown',()=>{
+           console.log( this.input.mousePointer.x, this.input.mousePointer.y)
+        })
         // this.Create_Rectangle_Add_Scrollable_Meta();    
         // this.dragHandler();
         // this.textDisplay();
-        let startVid2 = this.add.video(950,500,'train_in');
-        startVid2.play(false)
-        let startVid1 = this.add.video(950,10,'train_in');
-        startVid1.play(false)
+        this.getVideoFile();
+
+    }
+
+    getVideoFile(){
+        let startVid2 = this.add.video(950,500,'train_in')
+        let startVid1 = this.add.video(950,10,'train_in')
+        startVid1.play(false,0,7.21)
+        
 
         startVid1.on('complete',()=>{
-            console.log("Train Arrived")
+            this.Create_Rectangle_Add_Scrollable_Meta();
+            this.dragHandler();
         })
-
-
     }
 
     textDisplay(){
