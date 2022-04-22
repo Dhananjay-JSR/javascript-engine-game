@@ -12,7 +12,7 @@ const config = {
         width: '100%',
         height: '100%'
     },
-    scene: [Main_Scene_2 ] // :TODO: Add MainMenu,Main_Scene , Main_Scene_2 
+    scene: [MainMenu,Main_Scene , Main_Scene_2  ] // :TODO: Add MainMenu,Main_Scene , Main_Scene_2 
 };
 
 export default config;
