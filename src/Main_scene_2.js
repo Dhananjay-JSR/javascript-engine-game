@@ -1,19 +1,18 @@
 import Phaser from 'phaser';
-import _23557 from './assets/ascending/23557.png';
-import _23577 from './assets/ascending/23577.png';
-import _23757 from './assets/ascending/23757.png';
-import _23775 from './assets/ascending/23775.png';
-import _27375 from './assets/ascending/27375.png';
+import _67667 from './assets/descending/67667.png';
+import _67676 from './assets/descending/67676.png';
+import _67767 from './assets/descending/67767.png';
+import _76766 from './assets/descending/76766.png';
+import _77699 from './assets/descending/77699.png';
 import trainStart from './assets/video/train_in.mp4'
 import trainEnd from './assets/video/train_out.mp4'
-import Main_Scene_2 from './Main_scene_2';
 
-class Main_Scene extends Phaser.Scene
+class Main_Scene_2 extends Phaser.Scene
 {
     constructor ()
     {
         super({
-            key: 'Main_Scene'
+            key: 'Main_Scene_2'
         });
         this.filled = false;
         this.itemInTr1=null;
@@ -29,21 +28,19 @@ class Main_Scene extends Phaser.Scene
     {
         this.load.video('train_in', trainStart);
         this.load.video('train_out', trainEnd);
-        this.load.image('23557',_23557);
-        this.load.image('23577', _23577);
-        this.load.image('23757', _23757);
-        this.load.image('23775', _23775);
-        this.load.image('27375', _27375);
+        this.load.image('67667',_67667);
+        this.load.image('67676', _67676);
+        this.load.image('67767', _67767);
+        this.load.image('76766', _76766);
+        this.load.image('77699', _77699);
     }
       
     create ()
     {
         
-        // this.input.on('pointerdown',()=>{
-        //    console.log( this.input.mousePointer.x, this.input.mousePointer.y)
-        // })
-        //TODO: ENable only for debugging
-
+        this.input.on('pointerdown',()=>{
+           console.log( this.input.mousePointer.x, this.input.mousePointer.y)
+        })
         // this.Create_Rectangle_Add_Scrollable_Meta();    
         // this.dragHandler();
 
@@ -69,7 +66,7 @@ class Main_Scene extends Phaser.Scene
 
 
     textDisplay(){
-        this.textDisplay = this.add.text(333 , 36, 'Drag the numbers to the right order (Assending Order )', { font: '60px Georgia', fill: '#0000ff' });
+        this.textDisplay = this.add.text(333 , 36, 'Drag the numbers to the right order (Descending Order )', { font: '60px Georgia', fill: '#0000ff' });
         
     }
 
@@ -129,7 +126,7 @@ class Main_Scene extends Phaser.Scene
         );
     }
     itemChecker(){
-      //  console.warn(`${this.itemInTr1} ${this.itemInTr2} ${this.itemInTr3} ${this.itemInTr4} ${this.itemInTr5} `)
+        console.warn(`${this.itemInTr1} ${this.itemInTr2} ${this.itemInTr3} ${this.itemInTr4} ${this.itemInTr5} `)
         if((this.itemInTr1!=null)&&(this.itemInTr2!=null)&&(this.itemInTr3!=null)&&(this.itemInTr4!=null)&&(this.itemInTr5!=null)){
             this.input.off('drag')
             this.input.off('dragend')
@@ -147,7 +144,7 @@ class Main_Scene extends Phaser.Scene
         let array_number = number_array
      //   console.log(array_number)  // :TODO: Remove this line
         let expected_result = [...array_number]
-        expected_result.sort(function(a, b){return a - b});// Assending Order {sort(function(a, b){return b - a});} -- > //Desencing Order
+        expected_result.sort(function(a, b){return b - a});// Desecnding Order 
         for (let i=0;i<array_number.length;i++){
             if(this.correct_order){
                 if(expected_result[i]!=array_number[i])
@@ -163,41 +160,35 @@ class Main_Scene extends Phaser.Scene
             
             this.VideoObj1.changeSource('train_out').play(false)
             this.VideoObj1.addMarker('train_out',0,7.2)
-            this._23557.destroy();
-            this._23577.destroy();
-            this._23757.destroy()
-            this._23775.destroy()
-            this._27375.destroy()
+            this._77699.destroy();
+            this._67676.destroy();
+            this._67767.destroy()
+            this._67667.destroy()
+            this._76766.destroy()
             let localVideo1 = this.VideoObj1
             
             this.VideoObj1.on('complete',()=>{
-                this._23557.destroy();
-                this._23577.destroy();
-                this._23757.destroy()
-                this._23775.destroy()
-                this._27375.destroy()
-                this.VideoObj1.destroy();
-                this.scene.start('Main_Scene_2')
-                // let localText = this.add.text(571 ,478,"Refresh Page to Restart Game ", { font: '60px Arial', fill: '#FFFFFF' })
+                this._77699.destroy();
+                this._67676.destroy();
+                this._67767.destroy()
+                this._67667.destroy()
+                this._76766.destroy()
+                localVideo1.destroy()
+                let localText = this.add.text(571 ,478,"Restart game to Play Again ", { font: '60px Arial', fill: '#FFFFFF' })
         
             })
 
         }
         else {
            // console.log("You Fail") // :TODO: Remove this line
-            this.textDisplay.text="YOU LOOSE"
+            this.textDisplay.text="YOU LOOSE THIS ROUND"
             this.textDisplay.x="837"
-            this._23557.destroy();
-            this._23577.destroy();
-            this._23757.destroy()
-            this._23775.destroy()
-            this._27375.destroy()
+            this._77699.destroy();
+            this._67676.destroy();
+            this._67767.destroy()
+            this._67667.destroy()
+            this._76766.destroy()
             this.VideoObj1.destroy()
-            let localText = this.add.text(571 ,478,"Refresh Page to Restart Game ", { font: '60px Arial', fill: '#FFFFFF' })
-        
-   
-            
-      
             
             // this.registry.destroy(); // destroy registry
             // this.events.off()// disable all active events
@@ -206,17 +197,18 @@ class Main_Scene extends Phaser.Scene
     }
 
     addTextAssets(){
-        this._23775 = this.add.image( 343 , 459+472, '23775').setScale(0.26).setInteractive()
-        this._23577 = this.add.image( 50+493+100, 459+472, '23577').setScale(0.26).setInteractive();
-        this._23757 = this.add.image( 250+493+200, 459+472, '23757').setScale(0.26).setInteractive();
-        this._27375 = this.add.image( 350+593+300, 459+472, '27375').setScale(0.26).setInteractive();
-        this._23557 = this.add.image( 450+693+400, 459+472, '23557').setScale(0.26).setInteractive();
-        this._23557.name=23557
-        this._23577.name=23577
-        this._23757.name=23757
-        this._23775.name=23775
-        this._27375.name=27375
-        this.input.setDraggable([this._23557, this._23577, this._23757, this._23775, this._27375]);
+        
+        this._67667 = this.add.image( 343 , 459+472, '67667').setScale(0.26).setInteractive()
+        this._67676 = this.add.image( 50+493+100, 459+472, '67676').setScale(0.26).setInteractive();
+        this._67767 = this.add.image( 250+493+200, 459+472, '67767').setScale(0.26).setInteractive();
+        this._76766 = this.add.image( 350+593+300, 459+472, '76766').setScale(0.26).setInteractive();
+        this._77699 = this.add.image( 450+693+400, 459+472, '77699').setScale(0.26).setInteractive();
+        this._77699.name=77699
+        this._67676.name=67676
+        this._67767.name=67767
+        this._67667.name=67667
+        this._76766.name=76766
+        this.input.setDraggable([this._77699, this._67676, this._67767, this._67667, this._76766]);
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
@@ -239,4 +231,4 @@ class Main_Scene extends Phaser.Scene
     }
 }
 
-export default Main_Scene;
+export default Main_Scene_2;
