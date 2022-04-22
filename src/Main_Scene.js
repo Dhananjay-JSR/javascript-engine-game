@@ -1,14 +1,9 @@
 import Phaser from 'phaser';
-import zero from './assets/0.png';
-import one from './assets/1.png';
-import two from './assets/2.png';
-import three from './assets/3.png';
-import four from './assets/4.png';
-import five from './assets/5.png';
-import six from './assets/6.png';
-import seven from './assets/7.png';
-import eight from './assets/8.png';
-import nine from './assets/9.png';
+import _23557 from './assets/ascending/23557.png';
+import _23577 from './assets/ascending/23577.png';
+import _23757 from './assets/ascending/23757.png';
+import _23775 from './assets/ascending/23775.png';
+import _27375 from './assets/ascending/27375.png';
 import trainStart from './assets/video/train_in.mp4'
 import trainEnd from './assets/video/train_out.mp4'
 
@@ -25,13 +20,7 @@ class Main_Scene extends Phaser.Scene
         this.itemInTr3=null;
         this.itemInTr4=null;
         this.itemInTr5=null;
-        this.itemInBr1=null;
-        this.itemInBr2=null;
-        this.itemInBr3=null;
-        this.itemInBr4=null;
-        this.itemInBr5=null;
         this.VideoObj1;
-        this.VideoObj2;
         this.SceneManager = this.scene
     }
 
@@ -39,16 +28,11 @@ class Main_Scene extends Phaser.Scene
     {
         this.load.video('train_in', trainStart);
         this.load.video('train_out', trainEnd);
-        this.load.image('0', zero);
-        this.load.image('1', one);
-        this.load.image('2', two);
-        this.load.image('3', three);
-        this.load.image('4', four);
-        this.load.image('5', five);
-        this.load.image('6', six);
-        this.load.image('7', seven);
-        this.load.image('8', eight);
-        this.load.image('9', nine);
+        this.load.image('23557',_23557);
+        this.load.image('23577', _23577);
+        this.load.image('23757', _23757);
+        this.load.image('23775', _23775);
+        this.load.image('27375', _27375);
     }
       
     create ()
@@ -59,12 +43,14 @@ class Main_Scene extends Phaser.Scene
         })
         // this.Create_Rectangle_Add_Scrollable_Meta();    
         // this.dragHandler();
-        
-        this.VideoObj1 = this.add.video(950,600,'train_in').play(false).on('complete',()=>{
+
+        //TODO: enabled below for production
+
+        this.VideoObj1 = this.add.video(950,500,'train_in').play(false).on('complete',()=>{
             this.Create_Rectangle_Add_Scrollable_Meta()
             this.dragHandler()
         })
-       this.VideoObj2 = this.add.video(950,10,'train_in').play(false)
+      
         // this.trainVid1.play(false,0,7.21)
         // this.trainVid2.play(false,0,7.21)
         // this.trainVid2.on('complete',()=>{
@@ -88,90 +74,52 @@ class Main_Scene extends Phaser.Scene
         this.input.on('dragend', (pointer, gameObject) => {
             console.log(this.input.mousePointer.x, this.input.mousePointer.y) // TODO: REMOVE THIS IN PRODUCTION
             //----------------------- FOR TOP ROW SWAPPING ---------------------------------
-            if(((this.input.mousePointer.x>=607)&&(this.input.mousePointer.x<=751))&&((this.input.mousePointer.y<=296)&&(this.input.mousePointer.y>=149))){
+            if(((this.input.mousePointer.x>=607)&&(this.input.mousePointer.x<=751))&&((this.input.mousePointer.y<=296+493)&&(this.input.mousePointer.y>=149+493))){
             // Stick Object to tr1 if it's detected within range
             gameObject.x=676 
-            gameObject.y=224
+            gameObject.y=224+493
+            gameObject.setScale(0.2)
             this.itemInTr1=gameObject.name
             console.log(`${gameObject.name} is in tr1`) // :TODO: Remove this line
             this.itemChecker();
             }
-            else if (((this.input.mousePointer.x<=1015)&&(this.input.mousePointer.x>=288))&&((this.input.mousePointer.y<=296)&&(this.input.mousePointer.y>=149))){
+            else if (((this.input.mousePointer.x<=1015)&&(this.input.mousePointer.x>=288))&&((this.input.mousePointer.y<=296+493)&&(this.input.mousePointer.y>=149+493))){
                 // Stick Object to tr2 if it's detected within range
                 gameObject.x=937 
-                gameObject.y=224
+                gameObject.y=224+493
+                gameObject.setScale(0.2)
                 this.itemInTr2=gameObject.name
                 console.log(`${gameObject.name} is in tr2`) // :TODO: Remove this line
                 this.itemChecker();
             }
-            else if (((this.input.mousePointer.x<=1269 )&&(this.input.mousePointer.x>=1123 ))&&((this.input.mousePointer.y<=296)&&(this.input.mousePointer.y>=149))){
+            else if (((this.input.mousePointer.x<=1269 )&&(this.input.mousePointer.x>=1123 ))&&((this.input.mousePointer.y<=296+493)&&(this.input.mousePointer.y>=149+493))){
                 // Stick Object to tr3 if it's detected within range
-                gameObject.x=1187 
-                gameObject.y=224
+                gameObject.x=1203
+                gameObject.y=224+493
+                gameObject.setScale(0.2)
                 this.itemInTr3=gameObject.name
                 console.log(`${gameObject.name} is in tr3`) // :TODO: Remove this line
                 this.itemChecker();
             }
-            else if (((this.input.mousePointer.x<=1523)&&(this.input.mousePointer.x>=1377  ))&&((this.input.mousePointer.y<=296)&&(this.input.mousePointer.y>=149))){
+            else if (((this.input.mousePointer.x<=1523)&&(this.input.mousePointer.x>=1377  ))&&((this.input.mousePointer.y<=296+493)&&(this.input.mousePointer.y>=149+493))){
                 // Stick Object to tr4 if it's detected within range
-                gameObject.x=1441 
-                gameObject.y=224
+                gameObject.x=1452
+                gameObject.y=224+493
+                gameObject.setScale(0.2)
                 this.itemInTr4=gameObject.name
                 console.log(`${gameObject.name} is in tr4`) // :TODO: Remove this line
                 this.itemChecker();
             
             }
-            else if (((this.input.mousePointer.x<=1777)&&(this.input.mousePointer.x>=1634 ))&&((this.input.mousePointer.y<=296)&&(this.input.mousePointer.y>=149))){
+            else if (((this.input.mousePointer.x<=1777)&&(this.input.mousePointer.x>=1634 ))&&((this.input.mousePointer.y<=296+493)&&(this.input.mousePointer.y>=149+493))){
                 // Stick Object to tr5 if it's detected within range
-                gameObject.x=1698 
-                gameObject.y=224
+                gameObject.x=1715
+                gameObject.y=224+493
+                gameObject.setScale(0.2)
                 this.itemInTr5=gameObject.name
                 console.log(`${gameObject.name} is in tr5`) // :TODO: Remove this line
                 this.itemChecker();
             }
-
-            //      //----------------------- FOR BOTTOM ROW SWAPPING ---------------------------------
-            if(((this.input.mousePointer.x>=607)&&(this.input.mousePointer.x<=751))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
-                    // Stick Object to br1 if it's detected within range
-                    gameObject.x=676 
-                    gameObject.y=719+100
-                    this.itemInBr1=gameObject.name
-                    console.log(`${gameObject.name} is in br1`) // :TODO: Remove this line
-                    this.itemChecker();
-                    }
-                    else if (((this.input.mousePointer.x<=1015)&&(this.input.mousePointer.x>=288))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
-                        // Stick Object to tr2 if it's detected within range
-                        gameObject.x=937 
-                        gameObject.y=719+100
-                        this.itemInBr2=gameObject.name
-                        console.log(`${gameObject.name} is in br2`) // :TODO: Remove this line
-                        this.itemChecker();
-                    }
-                    else if (((this.input.mousePointer.x<=1269 )&&(this.input.mousePointer.x>=1123 ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
-                        // Stick Object to tr3 if it's detected within range
-                        gameObject.x=1187 
-                        gameObject.y=719+100
-                        this.itemInBr3=gameObject.name
-                        console.log(`${gameObject.name} is in br3`) // :TODO: Remove this line
-                        this.itemChecker();
-                    }
-                    else if (((this.input.mousePointer.x<=1523)&&(this.input.mousePointer.x>=1377  ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
-                        // Stick Object to tr4 if it's detected within range
-                        gameObject.x=1441 
-                        gameObject.y=719+100
-                        this.itemInBr4=gameObject.name
-                        console.log(`${gameObject.name} is in br4`) // :TODO: Remove this line
-                        this.itemChecker();
-                    
-                    }
-                    else if (((this.input.mousePointer.x<=1777)&&(this.input.mousePointer.x>=1634 ))&&((this.input.mousePointer.y<=790+100)&&(this.input.mousePointer.y>=644+100))){
-                        // Stick Object to tr5 if it's detected within range
-                        gameObject.x=1698
-                        gameObject.y=719+100
-                        this.itemInBr5=gameObject.name
-                        console.log(`${gameObject.name} is in br5`) // :TODO: Remove this line
-                        this.itemChecker();
-                    }
                 
 
 }
@@ -179,8 +127,7 @@ class Main_Scene extends Phaser.Scene
     }
     itemChecker(){
         console.warn(`${this.itemInTr1} ${this.itemInTr2} ${this.itemInTr3} ${this.itemInTr4} ${this.itemInTr5} `)
-        console.warn(`${this.itemInBr1} ${this.itemInBr2} ${this.itemInBr3} ${this.itemInBr4} ${this.itemInBr5} `)
-        if((this.itemInTr1!=null)&&(this.itemInTr2!=null)&&(this.itemInTr3!=null)&&(this.itemInTr4!=null)&&(this.itemInTr5!=null)&&(this.itemInBr1!=null)&&(this.itemInBr2!=null)&&(this.itemInBr3!=null)&&(this.itemInBr4!=null)&&(this.itemInBr5!=null)){
+        if((this.itemInTr1!=null)&&(this.itemInTr2!=null)&&(this.itemInTr3!=null)&&(this.itemInTr4!=null)&&(this.itemInTr5!=null)){
             this.input.off('drag')
             this.input.off('dragend')
             const number_align = [this.itemInTr1,this.itemInTr2,this.itemInTr3,this.itemInTr4,this.itemInTr5,this.itemInBr1,this.itemInBr2,this.itemInBr3,this.itemInBr4,this.itemInBr5]
@@ -212,33 +159,20 @@ class Main_Scene extends Phaser.Scene
             this.textDisplay.x="837"
             
             this.VideoObj1.changeSource('train_out').play(false)
-            this.VideoObj2.changeSource('train_out').play(false)
             this.VideoObj1.addMarker('train_out',0,7.2)
-            this.zero.destroy();
-            this.one.destroy();
-            this.two.destroy()
-            this.three.destroy()
-            this.four.destroy()
-            this.five.destroy()
-            this.six.destroy()
-            this.seven.destroy()
-            this.eight.destroy()
-            this.nine.destroy()
+            this._23557.destroy();
+            this._23577.destroy();
+            this._23757.destroy()
+            this._23775.destroy()
+            this._27375.destroy()
             let localVideo1 = this.VideoObj1
-            let localVideo2 = this.VideoObj2
             
             this.VideoObj1.on('complete',()=>{
-                this.zero.destroy()
-                this.one.destroy()
-                this.two.destroy()
-                this.three.destroy()
-                this.four.destroy()
-                this.five.destroy()
-                this.six.destroy()
-                this.seven.destroy()
-                this.eight.destroy()
-                this.nine.destroy()
-                localVideo2.destroy();
+                this._23557.destroy();
+                this._23577.destroy();
+                this._23757.destroy()
+                this._23775.destroy()
+                this._27375.destroy()
                 localVideo1.destroy()
                 let localText = this.add.text(571 ,478,"Refresh Page to Restart Game ", { font: '60px Arial', fill: '#FFFFFF' })
                 
@@ -257,27 +191,17 @@ class Main_Scene extends Phaser.Scene
     }
 
     addTextAssets(){
-        this.zero = this.add.image( 543 , 459, '0').setScale(0.26).setInteractive()
-        this.one = this.add.image( 150+493, 459, '1').setScale(0.26).setInteractive();
-        this.two = this.add.image( 250+493, 459, '2').setScale(0.26).setInteractive();
-        this.three = this.add.image( 350+493, 459, '3').setScale(0.26).setInteractive();
-        this.four = this.add.image( 450+493, 459, '4').setScale(0.26).setInteractive();
-        this.five = this.add.image( 550+493, 459, '5').setScale(0.26).setInteractive();
-        this.six = this.add.image( 650+493, 459, '6').setScale(0.26).setInteractive();
-        this.seven = this.add.image( 750+493, 459, '7').setScale(0.26).setInteractive();
-        this.eight = this.add.image( 850+493, 459, '8').setScale(0.26).setInteractive();
-        this.nine = this.add.image( 950+493, 459, '9').setScale(0.26).setInteractive();
-        this.zero.name=0
-        this.one.name=1
-        this.two.name=2
-        this.three.name=3
-        this.four.name=4
-        this.five.name=5
-        this.six.name=6
-        this.seven.name=7
-        this.eight.name=8
-        this.nine.name=9
-        this.input.setDraggable([this.zero, this.one, this.two, this.three, this.four, this.five, this.six, this.seven, this.eight, this.nine]);
+        this._23557 = this.add.image( 343 , 459+472, '23557').setScale(0.26).setInteractive()
+        this._23577 = this.add.image( 50+493+100, 459+472, '23577').setScale(0.26).setInteractive();
+        this._23757 = this.add.image( 250+493+200, 459+472, '23757').setScale(0.26).setInteractive();
+        this._23775 = this.add.image( 350+593+300, 459+472, '23775').setScale(0.26).setInteractive();
+        this._27375 = this.add.image( 450+693+400, 459+472, '27375').setScale(0.26).setInteractive();
+        this._23557.name=23557
+        this._23577.name=23577
+        this._23757.name=23757
+        this._23775.name=23775
+        this._27375.name=27375
+        this.input.setDraggable([this._23557, this._23577, this._23757, this._23775, this._27375]);
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX;
             gameObject.y = dragY;
@@ -287,16 +211,11 @@ class Main_Scene extends Phaser.Scene
     }
     Create_Rectangle_Add_Scrollable_Meta(){
         //Function to initlize Rectable and Add Dragable Property and Populate Meta Data by Name Tag
-        this.tr1 = this.add.rectangle(679, 223, 148, 148)
-        this.tr2 = this.add.rectangle(942, 230, 148, 148)
-        this.tr3 = this.add.rectangle(1196 , 228, 148, 148)
-        this.tr4 = this.add.rectangle(1450 , 230, 148, 148)
-        this.tr5 = this.add.rectangle(1705 , 227, 148, 148)
-        this.br1 = this.add.rectangle(681 , 718+100, 148, 148)
-        this.br2 = this.add.rectangle(936 , 722+100, 148, 148)
-        this.br3 = this.add.rectangle(1194 , 718+100, 148, 148)
-        this.br4 = this.add.rectangle(1447, 718+100, 148, 148)
-        this.br5 = this.add.rectangle(1706 , 718+100, 148, 148) 
+        this.tr1 = this.add.rectangle(679, 223+493, 148, 148)
+        this.tr2 = this.add.rectangle(942, 230+493, 148, 148)        //,0x9966ff).setStrokeStyle(4, 0xefc53f)
+        this.tr3 = this.add.rectangle(1196 , 228+493, 148, 148)
+        this.tr4 = this.add.rectangle(1450 , 230+493, 148, 148)
+        this.tr5 = this.add.rectangle(1705 , 227+493, 148, 148)
        this.addTextAssets();
 
     //    this.physics.add.existing(this.zero)
