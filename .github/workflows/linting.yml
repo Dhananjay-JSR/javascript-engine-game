@@ -3,10 +3,9 @@
 name: Check For Build
 
 on:
-
   push:
-    branches: [ main ]
-
+    tags:
+      - "v*.*.*"
 
   workflow_dispatch:
 
