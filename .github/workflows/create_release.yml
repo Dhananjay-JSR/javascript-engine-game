@@ -1,1 +1,39 @@
 
+# This is a basic workflow to help you get started with Actions
+
+name: Create Release
+
+# Runs only when Linting is Sucessful
+on:
+  workflow_run:
+    workflows: ["Check For Build"]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+      
+      # Setup Node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.1.1
+        
+      # Build Dist for Distribution
+      - name: Build Release Candidate
+        run: |
+              npm install
+              npm run build
+              zip -9rq serve_page.zip dist/
+      
+      
+      - name: GH Release
+        uses: softprops/action-gh-release@v0.1.13
+        with:
+          tag_name: main
+          files: serve_page.zip
+       
