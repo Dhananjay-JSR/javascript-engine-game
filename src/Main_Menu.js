@@ -9,7 +9,7 @@ import Main_Scene from "./Main_Scene";
 
 class MainMenu extends Scene {
     preload(){
-        this.add.text(760,500,'Loading Assets',{fontSize: '64px', fill: '#fff'});
+        this.add.text(433,284,'Loading Assets',{fontSize: '64px', fill: '#fff'});
         this.load.image('menu_bg', MainMenuImage);
         this.load.audio('menu_music',music)
         this.load.image('header',header)
@@ -20,28 +20,28 @@ class MainMenu extends Scene {
     create(){
         let music_state = true;
         var music = this.sound.add('menu_music');
-        music
+
         
-        this.add.image(960,600,'menu_bg').setScale(1);
+        this.add.image(653,384,'menu_bg').setScale(0.7);
        
-        let menu_header = this.add.image(950,200,'header')
+        let menu_header = this.add.image(640,100,'header').setScale(0.5)
         this.tweens.add({
             targets: menu_header,
-            y: 250,
+            y: 130,
             duration: 2000,
             ease: "Power2",
             yoyo: true,
             loop: -1
         });
         // this.sound.pauseOnBlur = false;
-        music.play(); //TODO:Enable THis
-        let startBtn = this.add.image(950,700,'startBtnImg').setInteractive().on('pointerdown',()=>{
+       music.play(); //TODO:Enable THis
+        let startBtn = this.add.image(650,450,'startBtnImg').setScale(0.5).setInteractive().on('pointerdown',()=>{
             // this.scene.destroy('MainMenu');
             this.scene.start('Main_Scene');
             music.pause();
         })
       
-        let muteBtn = this.add.image(950,900,'muteBtnImg').setInteractive().on('pointerdown',()=>{
+        let muteBtn = this.add.image(650,550,'muteBtnImg').setScale(0.5).setInteractive().on('pointerdown',()=>{
             if (music_state){
                 music.pause();
                 music_state = false;
