@@ -7,8 +7,9 @@ const config = {
     type: AUTO,
     autoCenter : true,
     scale: {
-        mode: Phaser.Scale.RESIZE,
         parent: 'canva-parent',
+        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+        mode:Phaser.Scale.FIT,
         width: '100%',
         height: '100%'
     },
